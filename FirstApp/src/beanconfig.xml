@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="truckEngine" class="com.uttara.test.TruckEngine">
+<property name="name" value="TruckEngine"></property>
+</bean>
+<bean id="nanoEngine" class="com.uttara.test.NanoEngine">
+<property name="name" value="NanoEngine"></property>
+</bean>
+
+
+<bean id="jaguar" class="com.uttara.test.Car">
+<property name="name" value="Jaguar"></property>
+<property name="bhp" value="70"></property>
+<property name="eng" ref="nanoEngine"></property>
+</bean>
+ <bean id="nano" class="com.uttara.test.Car" scope="singleton">
+<constructor-arg value="BMW"></constructor-arg>
+<constructor-arg value="40"></constructor-arg>
+<constructor-arg ref="truckEngine"></constructor-arg>
+</bean>
+</beans>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  -->
+
+<!-- Creating the object of the juggler class with reference duke. (Injecting the dependencies) -->
+<bean id="duke" class="xmlConfiguration.Juggler" >
+
+<!-- Injecting the values from parameterized constructor of the juggler (hard coding the value 15). (Wiring the dependencies) -->
+<constructor-arg value="15"></constructor-arg>
+
+<!--Injecting the vales from setters. (Wiring the dependencies)  -->
+<property name="name" value="duke"></property>
+</bean>
+
+<!-- Creating the object for BingoPoemClass. (ID=Injecting Dependencies)  -->
+<bean id="poem" class="xmlConfiguration.BingoPoem"/>
+
+
+<!-- creating the object for the PoeticJugglerClass. (ID)  -->
+<bean id="hans" class="xmlConfiguration.PoeticJuggler">
+<constructor-arg value="15"></constructor-arg>
+
+<!-- Injecting the values from parameterizes constructor of the PoeticJuggler (passing the instance reference of the BinogPoemClass). (Wiring the dependencies) -->
+<constructor-arg ref="poem"></constructor-arg>
+
+<!--Injecting the vales from setters. (Wiring the dependencies)  -->
+<property name="name" value="hans"></property> 
+</bean>
+
+<bean id="sax" class="xmlConfiguration.Saxophone"/>
+<bean id="piano" class="xmlConfiguration.Piano"/>
+<bean id="guitar" class="xmlConfiguration.Guitar"/>
+<bean id="kenny" class="xmlConfiguration.Instrumentallist">
+<property name="song" value="chaya chaya.."></property>
+<property name="instruement" ref="piano"></property>
+</bean>
+
+
+<bean id="oneman" class="xmlConfiguration.OneManBand" init-method="init">
+<property name="song" value="chayya chayya...."></property>
+<property name="instrument">
+<list>
+<ref bean="sax"/>
+<ref bean="piano"/>
+<ref bean="guitar"/>
+</list>
+</property>
+</bean>
+
+<bean id="audience" class="xmlConfiguration.Audience"/>
+
+<!--Configuring the aspect  -->
+<!--
+<aop:config>
+<aop:aspect ref="audience">
+<aop:before method="takeSeats" pointcut="execution(* xmlConfiguration.Performer.perform(..))"/>
+<aop:before method="swithOffPhones" pointcut="execution(* xmlConfiguration.Performer.perform(..))"/>
+<aop:after-returning method="applaud" pointcut="execution(* xmlConfiguration.Performer.perform(..))"/>
+<aop:after-throwing method="boo" pointcut="execution(* xmlConfiguration.Performer.perform(..))"/>
+</aop:aspect>
+</aop:config>
+-->
+</beans>
